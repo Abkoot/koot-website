@@ -184,7 +184,7 @@
         '<div class="gfacts"><span>' + (L ? 'مدة القلي' : 'Frying time') + '<b>' + d.fry[L ? 1 : 0] + '</b></span><span>' + (L ? 'مدة الحفظ بعد القلي' : 'Holding time') + '<b>' + d.hold[L ? 1 : 0] + '</b></span></div></button>';
     }).join('');
   }
-  function draw() { drawStatic(); drawVariant(); K.refresh(); K.applyLang(document); }
+  function draw() { drawStatic(); drawVariant(); K.refresh(); K.applyLang(document); K.reveal(); }
   document.addEventListener('click', function (e) {
     var b = e.target.closest('[data-vi],[data-spec]'); if (!b) return;
     if (b.dataset.spec) { K.add(p.variants[vi].sku, 'Specification sheet requested'); return; }

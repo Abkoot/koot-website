@@ -276,10 +276,10 @@ dialog.cmp::backdrop{background:rgba(16,53,36,.55)}
 
 /* ---------- product page ---------- */
 .pdp{padding:calc(var(--hdr) + clamp(20px,3vw,40px)) var(--gut) clamp(48px,7vw,96px);background:linear-gradient(color-mix(in srgb,var(--accent) 22%,var(--cream)),var(--cream))}
-.pdp-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,5vw,80px);align-items:center}
+.pdp-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,5vw,80px);align-items:center}
 .pdp-art{position:relative;aspect-ratio:1;max-height:76svh;width:100%;justify-self:center}
 .pdp-art .sc{position:absolute;inset:16% 0 0 20%}.pdp-art .pk{position:absolute;width:50%;aspect-ratio:3/4;inset-inline-start:0;top:0;transform:rotate(-6deg);filter:drop-shadow(0 30px 40px rgba(16,53,36,.3))}
-.pdp h1{font-size:clamp(2.8rem,6.4vw,5.6rem);margin-bottom:10px}
+.pdp h1{font-size:clamp(2.2rem,4.6vw,4rem);margin-bottom:10px;overflow-wrap:anywhere;hyphens:auto;line-height:1.05}
 .pdp .variant{font:500 italic clamp(1.4rem,2.6vw,2.1rem)/1.2 var(--display);color:var(--green);margin-bottom:20px}
 [lang=ar] .pdp .variant{font-style:normal}
 .opt{display:grid;gap:10px;margin-top:24px}.opt>span{font-weight:600;font-size:.85rem}.opt div{display:flex;flex-wrap:wrap;gap:8px}
@@ -551,11 +551,10 @@ dialog.zoom::backdrop{background:rgba(31,63,46,.7);backdrop-filter:blur(6px)}
 .nums{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
 .nums b{display:block;font:600 clamp(2.4rem,4.6vw,4rem)/1 var(--display);color:var(--green);letter-spacing:-.04em;font-variant-numeric:tabular-nums}
 .nums span{color:var(--muted);font-weight:500;font-size:.92rem}
-.mq{overflow:hidden;padding:10px 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
-.mq-track{display:flex;gap:16px;width:max-content;animation:mq 70s linear infinite}
-.mq--rev .mq-track{animation-direction:reverse;animation-duration:85s}
-.mq:hover .mq-track,.mq:focus-within .mq-track{animation-play-state:paused}
-@keyframes mq{to{transform:translateX(calc(-50% - 8px))}}
+.mq{overflow-x:auto;overflow-y:hidden;scrollbar-width:none;cursor:grab;touch-action:pan-x pan-y;overscroll-behavior-x:contain;padding:10px 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.mq::-webkit-scrollbar{display:none}
+.mq.drag{cursor:grabbing}.mq.drag .mq-card{pointer-events:none}
+.mq-track{display:flex;gap:16px;width:max-content}
 .mq-card{flex:none;width:168px;padding:12px 12px 14px;border-radius:22px;background:#fff;display:grid;gap:10px;text-align:center;font-weight:600;font-size:.86rem;line-height:1.25;box-shadow:inset 0 0 0 1px var(--line);transition:transform var(--t-med) var(--ease),box-shadow var(--t-med)}
 .mq-card:hover{transform:translateY(-8px) rotate(-1.5deg);box-shadow:0 22px 40px rgba(31,63,46,.16)}
 .mq-card img{width:100%;height:176px;object-fit:contain}
@@ -647,7 +646,7 @@ dialog.zoom::backdrop{background:rgba(31,63,46,.7);backdrop-filter:blur(6px)}
   .cd-row img{width:64px;height:78px;grid-row:span 3}
   .so-in kbd{display:none}
 }
-@media (prefers-reduced-motion:reduce){.mq{overflow-x:auto}.mq-track{animation:none}}
+
 
 /* ---------- print: the catalogue becomes the PDF ---------- */
 @page{size:A4;margin:12mm}

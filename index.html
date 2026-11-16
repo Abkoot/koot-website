@@ -211,6 +211,19 @@
   var n = { products: K.list.length, skus: skus, cats: K.cats.length, origins: Object.keys(org).length };
   document.querySelectorAll('.nums [data-n]').forEach(function (e) { e.dataset.countTo = n[e.dataset.n]; });
   document.addEventListener('koot:lang', shelf); shelf();
+
+  (function () {
+    document.querySelectorAll('.mq').forEach(function (m) {
+      var down = false, sx = 0, sl = 0, moved = false;
+      function wrap() { var t = m.firstElementChild, half = (t.scrollWidth + 16) / 2; if (m.scrollLeft >= half) m.scrollLeft -= half; else if (m.scrollLeft <= 0) m.scrollLeft += half; }
+      m.addEventListener('scroll', wrap, { passive: true });
+      setTimeout(function () { m.scrollLeft = (m.firstElementChild.scrollWidth + 16) / 4; }, 0);
+      m.addEventListener('pointerdown', function (e) { if (e.pointerType === 'touch') return; down = true; moved = false; sx = e.clientX; sl = m.scrollLeft; });
+      addEventListener('pointermove', function (e) { if (!down) return; var d = e.clientX - sx; if (Math.abs(d) > 4) { moved = true; m.classList.add('drag'); } if (moved) m.scrollLeft = sl - d; });
+      addEventListener('pointerup', function () { down = false; m.classList.remove('drag'); });
+      m.addEventListener('click', function (e) { if (moved) { e.preventDefault(); moved = false; } }, true);
+    });
+  })();
   K.boot(); show('fries-9'); if (K.countUp) K.countUp();
 })();
 </script>
