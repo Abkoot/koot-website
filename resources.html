@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Resources · Koot</title>
+<meta name="description" content="Koot catalogue, French fries specification sheet and a full item list.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400..800;1,9..144,400..600&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/koot.css">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+<main id="main">
+<section class="chero" style="--accent:#6DB04A">
+  <div class="wrap">
+    <p class="crumbs"><a href="index.html" data-ar="الرئيسية">Home</a> / <span data-ar="المصادر">Resources</span></p>
+    <span class="eyebrow" data-ar="المصادر">Resources</span>
+    <h1 data-ar="خذ المعلومات <em>معك.</em>">Take the details <em>with you.</em></h1>
+    <p class="lead" style="margin-top:24px" data-ar="الكتالوج وأوراق المواصفات وقائمة كاملة بالأصناف، متاحة بدون تسجيل.">The catalogue, specification sheets and a full item list, available without registration.</p>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap res-grid">
+    <a class="res" href="assets/docs/Koot_Catalogue.pdf" target="_blank" rel="noopener" data-reveal>
+      <span class="res-type">PDF</span><h3 data-ar="كتالوج كوت">Koot product catalogue</h3><p data-ar="كل فئات كوت: بطاطس وخضروات وفواكه ومأكولات بحرية وصلصات ومخللات.">All six Koot categories: fries, vegetables, fruits, seafood, sauces and pickles.</p><span class="more"><span data-ar="افتح الكتالوج">Open the catalogue</span> <span class="arr">→</span></span>
+    </a>
+    <a class="res" href="assets/docs/KOOT_Product_Specification.pdf" target="_blank" rel="noopener" data-reveal="2">
+      <span class="res-type">PDF · EN</span><h3 data-ar="ورقة مواصفات البطاطس المقلية">French fries specification sheet</h3><p data-ar="المكونات والعيوب المسموحة والتعبئة والتخزين وتعليمات القلي لدرجات AA وA وAB وB.">Ingredients, defect tolerances, packaging, storage and frying instructions for grades AA, A, AB and B.</p><span class="more"><span data-ar="افتح الورقة">Open the sheet</span> <span class="arr">→</span></span>
+    </a>
+    <button class="res" type="button" data-csv data-reveal="3">
+      <span class="res-type">CSV</span><h3 data-ar="قائمة الأصناف الكاملة">Full item list</h3><p data-ar="كل الأصناف برمز الصنف والعبوة والمنشأ والتخزين ومدة الصلاحية وأوزان الكرتون. يُفتح في إكسل.">Every item with item code, pack, origin, storage, shelf life and carton weights. Opens in Excel.</p><span class="more"><span data-ar="تنزيل القائمة">Download the list</span> <span class="arr">↓</span></span>
+    </button>
+  </div>
+  <div class="wrap" style="margin-top:clamp(40px,6vw,80px)">
+    <div class="head" data-reveal><h2 data-ar="تحتاج إلى ورقة <em>مواصفات أخرى؟</em>">Need another <em>specification sheet?</em></h2><p class="lead" data-ar="أوراق المنتجات الأخرى متاحة عند الطلب. أضف المنتج إلى اختياراتك واذكر ذلك في طلبك.">Sheets for other products are available on request. Add the product to your selection and mention it in your enquiry.</p></div>
+    <div class="btns"><a class="btn" href="category.html" data-ar="تصفّح المنتجات">Browse products</a><button class="btn btn--ghost" type="button" data-tray-open data-ar="افتح اختياراتك">Open your selection</button></div>
+  </div>
+</section>
+</main>
+<script src="assets/products.js"></script>
+<script src="assets/data.js"></script>
+<script src="assets/art.js"></script>
+<script src="assets/koot.js"></script>
+<script src="assets/extras.js"></script>
+<script>
+(function () {
+  var K = KOOT;
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest('[data-csv]')) return;
+    var rows = [['Item code', 'Product', 'Option', 'Pack', 'Category', 'Origin', 'Storage', 'Packaging', 'Shelf life (months)', 'Net weight per carton (kg)', 'Gross weight per carton (kg)']];
+    K.list.forEach(function (p) { p.variants.forEach(function (v) { rows.push([v.sku, p.en, v.label, v.pack, K.cat(p.cat).en, v.origin, v.storage, v.packaging, p.shelf_life_months, v.net_carton_kg, v.gross_carton_kg]); }); });
+    var csv = '\ufeff' + rows.map(function (r) { return r.map(function (c) { return '"' + String(c).replace(/"/g, '""') + '"'; }).join(','); }).join('\r\n');
+    var a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' })); a.download = 'Koot_Item_List.csv'; document.body.appendChild(a); a.click(); a.remove();
+  });
+  K.boot();
+})();
+</script>
+</body>
+</html>
