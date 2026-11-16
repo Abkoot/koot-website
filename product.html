@@ -188,7 +188,7 @@
   document.addEventListener('click', function (e) {
     var b = e.target.closest('[data-vi],[data-spec]'); if (!b) return;
     if (b.dataset.spec) { K.add(p.variants[vi].sku, 'Specification sheet requested'); return; }
-    vi = +b.dataset.vi; drawVariant();
+    vi = +b.dataset.vi; drawVariant(); if (b.closest('.opts')) $('#pdp').scrollIntoView({ behavior: 'smooth', block: 'start' });
     var u = new URL(location.href); u.searchParams.set('v', p.variants[vi].sku); history.replaceState(null, '', u);
   });
   document.addEventListener('koot:lang', draw);
