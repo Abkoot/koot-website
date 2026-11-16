@@ -222,6 +222,16 @@
       addEventListener('pointermove', function (e) { if (!down) return; var d = e.clientX - sx; if (Math.abs(d) > 4) { moved = true; m.classList.add('drag'); } if (moved) m.scrollLeft = sl - d; });
       addEventListener('pointerup', function () { down = false; m.classList.remove('drag'); });
       m.addEventListener('click', function (e) { if (moved) { e.preventDefault(); moved = false; } }, true);
+      var rev = m.classList.contains('mq--rev'), speed = rev ? -0.4 : 0.5, idle = 0, pos = null;
+      function hold() { idle = performance.now() + 2000; pos = null; }
+      ['pointerdown', 'wheel', 'touchstart', 'touchmove', 'focusin'].forEach(function (ev) { m.addEventListener(ev, hold, { passive: true }); });
+      m.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') hold(); });
+      m.addEventListener('pointermove', function (e) { if (e.pointerType === 'mouse') hold(); });
+      var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      (function step() {
+        if (!reduce && !down && performance.now() > idle) { if (pos === null) pos = m.scrollLeft; pos += speed; m.scrollLeft = pos; if (Math.abs(m.scrollLeft - pos) > 2) pos = m.scrollLeft; }
+        requestAnimationFrame(step);
+      })();
     });
   })();
   K.boot(); show('fries-9'); if (K.countUp) K.countUp();
