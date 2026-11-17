@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Design system · Koot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400..800;1,9..144,400..600&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/koot.css">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+<main id="main">
+<section class="ds-hero"><div class="wrap">
+  <span class="eyebrow">Koot design system · concept v1</span>
+  <h1 style="font-size:clamp(2.8rem,7vw,6rem)">A warm, cinematic <em>showroom.</em></h1>
+  <p class="lead" style="margin-top:24px">One strong idea per screen, generous space, and colour that comes from the food. This page defines the colour, type, motion and photography rules the three concept pages follow.</p>
+</div></section>
+
+<section class="sec" style="padding-top:40px"><div class="wrap">
+  <div class="head"><h2>Colour</h2><p class="lead">Green, cream and orange carry the brand. Each category adds one accent taken from its food. The accent tints backgrounds and never replaces the brand colours.</p></div>
+  <h4 style="margin-bottom:14px">Brand</h4>
+  <div class="sw" id="sw-brand"></div>
+  <h4 style="margin:36px 0 14px">Category accents</h4>
+  <div class="sw" id="sw-cat"></div>
+</div></section>
+
+<section class="sec sec--beige"><div class="wrap">
+  <div class="head"><h2>Typography</h2><p class="lead">A soft serif for headlines gives warmth and appetite. A clean sans handles everything practical. Arabic has its own pairing and is laid out right to left.</p></div>
+  <div class="spec-row"><small>Display · Fraunces 600</small><div style="font:600 clamp(2.4rem,6vw,5rem)/1 var(--display);letter-spacing:-.035em">Food that <em>matters.</em></div></div>
+  <div class="spec-row"><small>Heading · Fraunces 600</small><h3>Golden, crisp and consistent, in the cut your menu needs.</h3></div>
+  <div class="spec-row"><small>Body · Instrument Sans 400</small><p style="max-width:36em">Specifications stay open to every visitor. Forms appear only when someone wants a quotation, a sample or a conversation.</p></div>
+  <div class="spec-row"><small>Label · Instrument Sans 600</small><span class="eyebrow" style="margin:0">Koot frozen range</span></div>
+  <div class="spec-row" lang="ar" dir="rtl"><small lang="en" dir="ltr">Arabic display · Alexandria 700</small><div style="font:700 clamp(2.2rem,5.4vw,4.4rem)/1.3 Alexandria,sans-serif">طعام <span style="color:var(--green)">له معنى.</span></div></div>
+  <div class="spec-row" lang="ar" dir="rtl"><small lang="en" dir="ltr">Arabic body · IBM Plex Sans Arabic</small><p style="font-family:'IBM Plex Sans Arabic',sans-serif;max-width:36em">المواصفات متاحة لكل زائر. تظهر النماذج فقط عندما يطلب العميل عرض سعر أو عينة أو محادثة.</p></div>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <div class="head"><h2>Motion</h2><p class="lead">Motion supports the food and never delays the buyer. Every scroll effect has a tap equivalent, and everything respects the reduced-motion setting.</p></div>
+  <div class="mo">
+    <div><code>--t-fast · 0.2s</code><h3>Respond</h3><p>Hover, press and chip states.</p></div>
+    <div><code>--t-med · 0.5s</code><h3>Change</h3><p>Category switch, tray, menus, crossfades.</p></div>
+    <div><code>--t-slow · 0.9s</code><h3>Reveal</h3><p>Section entrances and the product-to-plate stages.</p></div>
+  </div>
+  <p style="margin-top:20px;color:var(--muted)">One easing curve everywhere: <code>cubic-bezier(.2,.7,.1,1)</code>. Elements rise 34px and fade in once; nothing replays on scroll back.</p>
+</div></section>
+
+<section class="sec sec--beige"><div class="wrap">
+  <div class="head"><h2>Photography</h2><p class="lead">Four shot types cover the whole site. The examples below come from the catalogue; a raw-ingredient photo is still missing.</p></div>
+  <div class="shots">
+    <div><div class="ph"><img src="assets/img/products/french-fries-9-mm-printed-2-5-kg-600.webp" alt="" style="mix-blend-mode:multiply;height:100%;width:auto"></div><h3>Pack shot</h3><p>Straight on, soft top light, transparent background. Same angle and scale for every pack.</p></div>
+    <div><div class="ph" style="padding:0"><img src="assets/img/food/table-sauces.webp" alt="" style="height:100%;width:100%;object-fit:cover;border-radius:16px"></div><h3>Plate, top down</h3><p>One dish on a cream plate, shot from above. Used in heroes and the category switcher.</p></div>
+    <div><div class="ph" style="padding:0"><img src="assets/img/products/french-fries-9-mm-printed-2-5-kg-1200.webp" alt="" style="height:100%;width:100%;object-fit:cover;object-position:50% 88%;border-radius:16px"></div><h3>Raw ingredient</h3><p>The ingredient alone on a dark surface. First stage of the product-to-plate story.</p></div>
+    <div><div class="ph" style="padding:0"><img src="assets/img/food/fries-closeup.webp" alt="" style="height:100%;width:100%;object-fit:cover;border-radius:16px"></div><h3>Texture close-up</h3><p>Macro detail that fills the frame: salt on a fry, frost on a strawberry.</p></div>
+  </div>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <div class="head"><h2>Components</h2></div>
+  <div class="spec-row"><small>Buttons</small><div class="btns"><span class="btn">Primary</span><span class="btn btn--orange">Enquiry action</span><span class="btn btn--ghost">Secondary</span><span class="btn btn--sm">Small</span></div></div>
+  <div class="spec-row"><small>Filter chips</small><div class="btns"><span class="chip" aria-pressed="true" style="display:inline-flex;align-items:center">Selected</span><span class="chip" style="display:inline-flex;align-items:center">Default</span></div></div>
+  <div class="spec-row"><small>Shape</small><p>Cards use a 28px radius, controls are full pills, and touch targets are at least 44px.</p></div>
+</div></section>
+
+<section class="sec sec--green"><div class="wrap">
+  <div class="head"><h2>Placeholders to <em>replace.</em></h2></div>
+  <ul class="todo">
+    <li><strong>Logo.</strong> Extracted from the catalogue at 420 px wide. Replace with a vector file.</li>
+    <li><strong>Photography.</strong> Food photos come from the catalogue at low resolution. Replace with the brief in HANDOFF.md.</li>
+    <li><strong>Product data.</strong> Cuts, pack sizes, frying times, shelf life and ingredients are sample values.</li>
+    <li><strong>Arabic copy.</strong> Translations, including the Arabic slogan, need review by a native speaker.</li>
+    <li><strong>Farmer illustration.</strong> Not yet placed. Planned for section transitions and the Our Story page.</li>
+  </ul>
+</div></section>
+</main>
+<script src="assets/products.js"></script>
+<script src="assets/data.js"></script>
+<script src="assets/art.js"></script>
+<script src="assets/koot.js"></script>
+<script src="assets/extras.js"></script>
+<script>
+(function () {
+  function sw(el, list) { document.getElementById(el).innerHTML = list.map(function (s) { return '<div><i style="background:' + s[1] + '"></i><span>' + s[0] + '</span><code>' + s[1] + '</code></div>'; }).join(''); }
+  sw('sw-brand', [['Koot green (catalogue)', '#36644B'], ['Deep green', '#1F3F2E'], ['Logo green', '#2FB67C'], ['Light green', '#6ABE8C'], ['Cream', '#F8F3E7'], ['Beige', '#F2E8D3'], ['Sand', '#E3D3B5'], ['Orange', '#E3914D'], ['Ink', '#15221B']]);
+  sw('sw-cat', KOOT.cats.map(function (c) { return [c.en, c.accent]; }));
+  KOOT.boot();
+})();
+</script>
+</body>
+</html>

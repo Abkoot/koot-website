@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Request for quotation · Koot</title>
+<meta name="description" content="Pick the Koot categories you need and request a quotation. Our team prices it and your estimate comes back by email.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400..800;1,9..144,400..600&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/koot.css">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+<main id="main">
+<section class="chero" style="--accent:#E3914D">
+  <div class="wrap">
+    <p class="crumbs"><a href="index.html" data-ar="الرئيسية">Home</a> / <span data-ar="طلب عرض سعر">Request for quotation</span></p>
+    <span class="eyebrow" data-ar="طلب عرض سعر">Request for quotation</span>
+    <h1 data-ar="اختر. نُسعّر. <em>يصلك العرض.</em>">Pick. We price. <em>You get the quote.</em></h1>
+    <ol class="rfq-steps">
+      <li><b>1</b><span data-ar="أضف الفئات التي تحتاجها">Add the categories you need</span></li>
+      <li><b>2</b><span data-ar="اختر المنتجات والكميات">Choose products and quantities</span></li>
+      <li><b>3</b><span data-ar="يصلك عرض السعر على بريدك">The quotation arrives by email</span></li>
+    </ol>
+  </div>
+</section>
+
+<section class="sec" style="padding-top:clamp(28px,4vw,56px)">
+  <div class="wrap">
+    <h2 class="rfq-h" data-ar="١ · الفئات">1 · Categories</h2>
+    <div class="rfq-cats"></div>
+
+    <h2 class="rfq-h" data-ar="٢ · المنتجات">2 · Products</h2>
+    <div class="rfq-list"></div>
+
+    <h2 class="rfq-h" data-ar="٣ · بياناتك">3 · Your details</h2>
+    <form class="cform rfq-form">
+      <label><span data-ar="الاسم">Name</span><input name="name" required autocomplete="name"></label>
+      <label><span data-ar="الشركة">Company</span><input name="company" autocomplete="organization"></label>
+      <label><span data-ar="البريد الإلكتروني">Email</span><input name="email" type="email" required autocomplete="email"></label>
+      <label><span data-ar="الهاتف">Phone</span><input name="phone" type="tel" autocomplete="tel"></label>
+      <label><span data-ar="وجهة التسليم">Delivery destination</span><input name="dest" data-ar-ph="المدينة، الدولة" placeholder="City, country" autocomplete="country-name"></label>
+      <label><span data-ar="نوع نشاطك">Your business</span><select name="biz"><option data-ar="موزّع خدمات الطعام">Foodservice distributor</option><option data-ar="مستورد / تاجر جملة">Importer / wholesaler</option></select></label>
+      <label class="wide"><span data-ar="ملاحظات (اختياري)">Notes (optional)</span><textarea name="msg" rows="3"></textarea></label>
+      <input name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
+      <button class="btn btn--orange wide" type="submit" data-ar="أرسل طلب عرض السعر">Send request for quotation</button>
+      <p class="form-msg wide" role="alert"></p>
+      <p class="form-note wide"><span data-ar="أو راسلنا مباشرة على">Or email us directly at</span> <a href="mailto:sales@koot.ae">sales@koot.ae</a></p>
+    </form>
+  </div>
+</section>
+</main>
+
+<script src="assets/products.js"></script>
+<script src="assets/data.js"></script>
+<script src="assets/art.js"></script>
+<script src="assets/koot.js"></script>
+<script src="assets/extras.js"></script>
+<script>
+(function () {
+  var K = KOOT, $ = function (s) { return document.querySelector(s); };
+  var units = [['cartons', 'Cartons', 'كراتين'], ['pallets', 'Pallets', 'منصات'], ['containers', 'Containers', 'حاويات']];
+  function ar() { return K.lang === 'ar'; }
+  function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;'); }
+  function rows() {
+    return K.sel().map(function (s) { var k = K.products[s.id]; return k && { s: s, k: k, p: K.byId(k.pid), v: K.byId(k.pid).variants.find(function (v) { return v.sku === s.id; }) }; }).filter(Boolean);
+  }
+  function drawCats() {
+    $('.rfq-cats').innerHTML = K.cats.map(function (c) {
+      var n = K.skusOf(c.id).length, on = K.catOn(c.id), part = !on && K.catAny(c.id);
+      return '<div class="rfq-cat' + (on ? ' on' : '') + '" style="--accent:' + c.accent + '"><div><strong>' + (ar() ? c.ar : c.en) + '</strong><small>' + (ar() ? n + ' صنفاً' : n + ' items') + (part ? (ar() ? ' · اختيار جزئي' : ' · partly selected') : '') + '</small></div>' +
+        '<button class="btn btn--sm' + (on ? '' : ' btn--ghost') + '" type="button" data-addcat="' + c.id + '"></button></div>';
+    }).join('');
+  }
+  function drawList() {
+    var rs = rows(), box = $('.rfq-list');
+    if (!rs.length) { box.innerHTML = '<p class="empty">' + (ar() ? 'لم تضف أي فئة بعد. أضف فئة من الأعلى.' : 'Nothing yet. Add a category above.') + '</p>'; return; }
+    box.innerHTML = K.cats.map(function (c) {
+      var rr = rs.filter(function (r) { return r.p.cat === c.id; }); if (!rr.length) return '';
+      return '<div class="rfq-group"><h3 style="--accent:' + c.accent + '">' + (ar() ? c.ar : c.en) + '<small>' + rr.length + '</small></h3><div class="tbl-wrap"><table class="rfq-t"><thead><tr><th></th><th>' + (ar() ? 'المنتج' : 'Product') + '</th><th>' + (ar() ? 'العبوة' : 'Pack') + '</th><th>' + (ar() ? 'الكمية' : 'Quantity') + '</th><th>' + (ar() ? 'الوحدة' : 'Unit') + '</th><th></th></tr></thead><tbody>' +
+        rr.map(function (r) {
+          return '<tr data-id="' + r.s.id + '"><td class="rt-img"><img src="' + K.src(r.k.image, 600) + '" alt="" loading="lazy"></td><td><strong>' + esc(ar() ? r.p.ar : r.p.en) + '</strong><small>' + esc(ar() ? (r.v.label_ar || '') : (r.v.label || '')) + ' <bdi dir="ltr">' + r.s.id + '</bdi></small></td><td dir="ltr">' + esc(ar() ? r.v.pack_ar : r.v.pack) + '</td>' +
+            '<td><input type="number" min="1" value="' + r.s.qty + '" data-qty aria-label="Quantity"></td><td><select data-unit aria-label="Unit">' + units.map(function (u) { return '<option value="' + u[0] + '"' + (u[0] === r.s.unit ? ' selected' : '') + '>' + (ar() ? u[2] : u[1]) + '</option>'; }).join('') + '</select></td>' +
+            '<td><button type="button" class="rm" data-rm aria-label="Remove">×</button></td></tr>';
+        }).join('') + '</tbody></table></div></div>';
+    }).join('');
+  }
+  function draw() { drawCats(); drawList(); K.refresh(); }
+  document.addEventListener('koot:sel', draw);
+  document.addEventListener('koot:lang', draw);
+  $('.rfq-list').addEventListener('click', function (e) { var b = e.target.closest('[data-rm]'); if (b) K.remove(b.closest('tr').dataset.id); });
+  function upd(e, key, val) { var tr = e.target.closest('tr'); var s = K.sel().find(function (x) { return x.id === tr.dataset.id; }); if (s) { s[key] = val; localStorage.setItem('koot-sel', JSON.stringify(K.sel())); } }
+  $('.rfq-list').addEventListener('input', function (e) { if (e.target.matches('[data-qty]')) upd(e, 'qty', Math.max(1, parseInt(e.target.value, 10) || 1)); });
+  $('.rfq-list').addEventListener('change', function (e) { if (e.target.matches('[data-unit]')) upd(e, 'unit', e.target.value); });
+
+  /* The request leaves the site as JSON. `text` and `html` hold the table the team receives by mail:
+     the "Estimate" column is blank on purpose. It is filled in, then the Zoho estimate is created from `lines`. See HANDOFF.md. */
+  $('.rfq-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var f = e.target, msg = f.querySelector('.form-msg'), btn = f.querySelector('[type=submit]'), rs = rows();
+    if (f.website.value) return;
+    if (!rs.length) { msg.textContent = ar() ? 'أضف فئة واحدة على الأقل.' : 'Add at least one category first.'; return; }
+    var ref = 'RFQ-' + new Date().toISOString().slice(0, 10).replace(/-/g, '') + '-' + Math.random().toString(36).slice(2, 6).toUpperCase();
+    var lines = rs.map(function (r) { return { sku: r.s.id, category: K.cat(r.p.cat).en, product: r.p.en, option: r.v.label || '', pack: r.v.pack, quantity: r.s.qty, unit: r.s.unit, estimate: null }; });
+    var text = lines.map(function (l) { return [l.sku, l.product + (l.option ? ' (' + l.option + ')' : ''), l.pack, l.quantity + ' ' + l.unit, 'Estimate: ________'].join(' | '); }).join('\n');
+    var html = '<table border="1" cellpadding="6" cellspacing="0"><tr><th>Item code</th><th>Category</th><th>Product</th><th>Pack</th><th>Quantity</th><th>Unit</th><th>Estimate</th></tr>' + lines.map(function (l) { return '<tr><td>' + l.sku + '</td><td>' + l.category + '</td><td>' + esc(l.product + (l.option ? ' · ' + l.option : '')) + '</td><td>' + l.pack + '</td><td>' + l.quantity + '</td><td>' + l.unit + '</td><td></td></tr>'; }).join('') + '</table>';
+    btn.disabled = true; msg.textContent = ar() ? 'جارٍ الإرسال…' : 'Sending…';
+    K.send({ type: 'rfq', reference: ref, _subject: 'Koot RFQ ' + ref + (f.company.value ? ' · ' + f.company.value : ''), to: K.config.rfqTo, replyTo: f.email.value,
+      customer: { name: f.name.value, company: f.company.value, email: f.email.value, phone: f.phone.value, destination: f.dest.value, business: f.biz.value }, notes: f.msg.value, lines: lines, text: text, html: html }).then(function () {
+      K.clear();
+      f.outerHTML = '<div class="tray-done"><h3>' + (ar() ? 'تم إرسال طلبك.' : 'Your request is sent.') + '</h3><p>' + (ar() ? 'رقم الطلب ' : 'Reference ') + '<bdi>' + ref + '</bdi>. ' + (ar() ? 'سيصلك عرض السعر على ' : 'Your quotation will arrive at ') + '<bdi>' + esc(f.email.value) + '</bdi>.</p></div>';
+    }).catch(function () {
+      btn.disabled = false; msg.innerHTML = (ar() ? 'تعذّر الإرسال من الموقع. راسلنا مباشرة على ' : 'We could not send this from the website. Please email us directly at ') + '<a href="mailto:sales@koot.ae">sales@koot.ae</a>.';
+    });
+  });
+  K.boot(); draw();
+  var h = location.hash.slice(1); if (h && K.cat(h) && !K.catOn(h)) K.addCat(h);
+})();
+</script>
+</body>
+</html>
