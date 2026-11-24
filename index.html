@@ -200,7 +200,13 @@
       m.addEventListener('pointermove', function (e) { if (e.pointerType === 'mouse') hold(); });
       var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
       (function step() {
-        if (!reduce && !down && performance.now() > idle) { if (pos === null) pos = m.scrollLeft; pos += speed; m.scrollLeft = pos; if (Math.abs(m.scrollLeft - pos) > 2) pos = m.scrollLeft; }
+        if (!reduce && !down && performance.now() > idle) {
+          /* keep our own position and wrap it here: the reverse row used to sit at 0, where scrolling back does nothing and no scroll event fires */
+          var half = (m.firstElementChild.scrollWidth + 16) / 2;
+          if (pos === null || Math.abs(m.scrollLeft - pos) > 40) pos = m.scrollLeft;
+          pos += speed; if (pos <= 0) pos += half; else if (pos >= half) pos -= half;
+          m.scrollLeft = pos;
+        }
         requestAnimationFrame(step);
       })();
     });
