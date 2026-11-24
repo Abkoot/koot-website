@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400..800;1,9..144,400..600&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/koot.css">
-<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/img/favicon.png" type="image/png"><link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 </head>
 <body>
 <main id="main">
@@ -171,7 +171,8 @@
   document.addEventListener('koot:lang', table); table(); run();
 
   function shelf() {
-    var half = Math.ceil(K.list.length / 2);
+    /* row 1: fries and vegetables; row 2 starts at fruits */
+    var half = K.list.findIndex(function (p) { return p.cat === 'fruits'; }); if (half < 1) half = Math.ceil(K.list.length / 2);
     document.querySelectorAll('.mq-track').forEach(function (t) {
       var items = +t.dataset.row ? K.list.slice(half) : K.list.slice(0, half);
       var h = items.map(function (p) { return '<a class="mq-card" href="product.html?p=' + p.id + '"><img src="' + K.src(p.image, 600) + '" alt="" loading="lazy" width="144" height="176"><span>' + (K.lang === 'ar' ? p.ar : p.en) + '</span></a>'; }).join('');
@@ -188,7 +189,7 @@
       var down = false, sx = 0, sl = 0, moved = false;
       function wrap() { var t = m.firstElementChild, half = (t.scrollWidth + 16) / 2; if (m.scrollLeft >= half) m.scrollLeft -= half; else if (m.scrollLeft <= 0) m.scrollLeft += half; }
       m.addEventListener('scroll', wrap, { passive: true });
-      setTimeout(function () { m.scrollLeft = (m.firstElementChild.scrollWidth + 16) / 4; }, 0);
+      setTimeout(function () { var h = (m.firstElementChild.scrollWidth + 16) / 2; m.scrollLeft = m.classList.contains('mq--rev') ? h - 1 : h / 2; }, 0);   /* reverse row opens with its first card (fruits) at the start */
       m.addEventListener('pointerdown', function (e) { if (e.pointerType === 'touch') return; down = true; moved = false; sx = e.clientX; sl = m.scrollLeft; });
       addEventListener('pointermove', function (e) { if (!down) return; var d = e.clientX - sx; if (Math.abs(d) > 4) { moved = true; m.classList.add('drag'); } if (moved) m.scrollLeft = sl - d; });
       addEventListener('pointerup', function () { down = false; m.classList.remove('drag'); });
