@@ -27,7 +27,7 @@
           <button class="btn btn--orange main-add" type="button"></button>
           <a class="btn btn--ghost" href="#specs" data-ar="المواصفات">Specifications</a>
         </div>
-        <p class="pill-note" data-ar="المواصفات متاحة بدون تسجيل. أضف المنتج إلى اختياراتك عند طلب عرض سعر أو عينة.">Specifications are open to everyone. Add to your selection when you want a quotation or a sample.</p>
+        <p class="pill-note" data-ar="أخبرنا بالكميات ووجهة الشحن، وسيرد عليك فريق المبيعات بالأسعار ومدة التوريد.">Tell us volumes and destination; our sales team replies with pricing and lead time.</p>
       </div>
     </div>
   </div>
@@ -88,7 +88,7 @@
 
 <section class="sec sec--beige">
   <div class="wrap">
-    <div class="head" data-reveal><span class="eyebrow" data-ar="أكمل اختياراتك">Complete your selection</span><h2 data-ar="يتماشى <em>معها.</em>">Goes well <em>with.</em></h2></div>
+    <div class="head" data-reveal><span class="eyebrow" data-ar="من المجموعة نفسها">From the same range</span><h2 data-ar="يُورَّد <em>معها.</em>">Supplied <em>alongside.</em></h2></div>
     <div class="grid more"></div>
   </div>
 </section>
@@ -129,12 +129,11 @@
     document.title = nm(p) + ' · Koot';
     $('.more').innerHTML = pairs[p.cat].map(K.byId).filter(function (x) { return x && x.id !== p.id; }).slice(0, 3).map(function (x, i) {
       var c = K.cat(x.cat), v = x.variants[0];
-      return '<article class="pcard" style="--accent:' + c.accent + '" data-reveal="' + (i + 1) + '"><a class="pcard-art" href="product.html?p=' + x.id + '"><img src="' + K.src(x.image, 600) + '" alt="' + x.en + '" loading="lazy" width="450" height="600"></a><div class="pcard-body"><h3><a href="product.html?p=' + x.id + '">' + nm(x) + '</a></h3><div class="meta">' + K.packs(x).map(function (s) { return '<span dir="ltr">' + s + '</span>'; }).join('') + '</div></div><div class="pcard-act"><button class="btn btn--sm" type="button" data-add="' + v.sku + '"></button></div></article>';
+      return '<article class="pcard" style="--accent:' + c.accent + '" data-reveal="' + (i + 1) + '"><a class="pcard-art" href="product.html?p=' + x.id + '"><img src="' + K.src(x.image, 600) + '" alt="' + x.en + '" loading="lazy" width="450" height="600"></a><div class="pcard-body"><h3><a href="product.html?p=' + x.id + '">' + nm(x) + '</a></h3><div class="meta">' + K.packs(x).map(function (s) { return '<span dir="ltr">' + s + '</span>'; }).join('') + '</div></div><div class="pcard-act"><a class="btn btn--sm" href="product.html?p=' + x.id + '">' + (ar() ? 'التفاصيل' : 'View details') + '</a></div></article>';
     }).join('');
     $('#prep').hidden = !isFries;
     var dl = [];
     if (isFries) dl.push('<a class="btn-row" href="assets/docs/KOOT_Product_Specification.pdf" target="_blank" rel="noopener"><span>' + (ar() ? 'ورقة مواصفات البطاطس المقلية' : 'French fries specification sheet') + '</span><small>PDF · EN</small></a>');
-    else dl.push('<button type="button" data-spec><span>' + (ar() ? 'اطلب ورقة المواصفات' : 'Request the specification sheet') + '</span><small>' + (ar() ? 'تُضاف إلى اختياراتك' : 'Added to your selection') + '</small></button>');
     dl.push('<a class="btn-row" data-photo download><span>' + (ar() ? 'صورة العبوة' : 'Pack photo') + '</span><small>WEBP</small></a>');
     $('.dl').innerHTML = dl.join('');
     $('.opts thead').innerHTML = '<tr><th>' + (ar() ? 'رمز الصنف' : 'Item code') + '</th><th>' + (ar() ? 'الخيار' : 'Option') + '</th><th>' + (ar() ? 'العبوة' : 'Pack') + '</th><th>' + (ar() ? 'الكرتون (صافي / إجمالي)' : 'Carton (net / gross)') + '</th><th>' + (ar() ? 'المنشأ' : 'Origin') + '</th><th></th></tr>';
@@ -165,7 +164,7 @@
     if (isFries) $('.u-fry').innerHTML = (ar() ? 'من المجمّد مباشرة في زيت ساخن عند ' : 'Straight from frozen in hot oil at ') + '<span dir="ltr">170–180 °' + (ar() ? 'م' : 'C') + '</span>' + (ar() ? ' لمدة ' : ' for ') + fryTime(v) + (ar() ? ' حتى تصبح ذهبية ومقرمشة.' : ' until golden and crisp.');
     var photo = $('[data-photo]'); if (photo) photo.href = K.src(v.image, 1200);
     $('.s-name').textContent = nm(p); $('.s-meta').textContent = (v.label ? v.label + ' · ' : '') + v.pack;
-    [$('.main-add'), $('.stick-add')].forEach(function (b) { b.dataset.add = v.sku; });
+    [$('.main-add'), $('.stick-add')].forEach(function (b) { b.dataset.addcat = p.cat; });
     drawGrades();
     K.refresh();
   }
@@ -187,7 +186,6 @@
   function draw() { drawStatic(); drawVariant(); K.refresh(); K.applyLang(document); K.reveal(); }
   document.addEventListener('click', function (e) {
     var b = e.target.closest('[data-vi],[data-spec]'); if (!b) return;
-    if (b.dataset.spec) { K.add(p.variants[vi].sku, 'Specification sheet requested'); return; }
     var fromTbl = !!b.closest('.opts'); vi = +b.dataset.vi; drawVariant(); if (fromTbl) $('#pdp').scrollIntoView({ behavior: 'smooth', block: 'start' });
     var u = new URL(location.href); u.searchParams.set('v', p.variants[vi].sku); history.replaceState(null, '', u);
   });

@@ -55,10 +55,9 @@
     return out;
   }
   function draw() {
-    var n = sel().length;
-    if (!n && mode === 'sel') mode = 'all';
+    var n = 0; mode = 'all';   /* trading site: no shopping selection, the catalogue is always the full range */
     document.querySelectorAll('[data-mode]').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.mode === mode); });
-    var sb = $('[data-mode=sel]'); sb.textContent = T('My selection (' + n + ')', 'اختياراتي (' + n + ')'); sb.disabled = !n; sb.style.opacity = n ? 1 : .45;
+    var sb = $('[data-mode=sel]'); sb.textContent = T('My selection (' + n + ')', 'اختياراتي (' + n + ')'); sb.hidden = true;
     var rs = rows(), who = $('#who').value.trim();
     $('.cd-title').textContent = mode === 'sel' ? T('Product selection', 'المنتجات المختارة') : T('Product catalogue', 'كتالوج المنتجات');
     $('.cd-meta').textContent = (who ? T('Prepared for ', 'معدّ لـ ') + who + ' · ' : '') + new Date().toLocaleDateString(K.lang === 'ar' ? 'ar-AE' : 'en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) + ' · ' + T(rs.length + ' items', rs.length + ' صنف');

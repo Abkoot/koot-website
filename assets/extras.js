@@ -24,8 +24,8 @@
   function draw(q) {
     input.placeholder = T('Search products or item codes', 'ابحث عن منتج أو رمز صنف');
     if (!q) {
-      res.innerHTML = '<p class="so-h">' + T('Browse by category', 'تصفّح حسب الفئة') + '</p><div class="so-chips">' + K.cats.map(function (c) { return '<a class="chip" href="category.html?cat=' + c.id + '">' + nm(c) + '</a>'; }).join('') + '</div>' +
-        '<p class="so-h">' + T('Shortcuts', 'اختصارات') + '</p><div class="so-chips"><a class="chip" href="finder.html">' + T('Product finder', 'اختر منتجك') + '</a><a class="chip" href="catalogue.html">' + T('Build a PDF catalogue', 'أنشئ كتالوج PDF') + '</a><a class="chip" href="resources.html">' + T('Downloads', 'التنزيلات') + '</a></div>';
+      res.innerHTML = '<p class="so-h">' + T('Product lines', 'خطوط المنتجات') + '</p><div class="so-chips">' + K.cats.map(function (c) { return '<a class="chip" href="category.html?cat=' + c.id + '">' + nm(c) + '</a>'; }).join('') + '</div>' +
+        '<p class="so-h">' + T('Shortcuts', 'اختصارات') + '</p><div class="so-chips"><a class="chip" href="rfq.html">' + T('Trade enquiry', 'استفسار تجاري') + '</a><a class="chip" href="resources.html">' + T('Downloads', 'التنزيلات') + '</a></div>';
       return;
     }
     var terms = q.toLowerCase().split(/\s+/), hits = K.list.filter(function (p) { var h = hay(p); return terms.every(function (t) { return h.indexOf(t) > -1; }); });
@@ -144,15 +144,13 @@
   function ico(d) { return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + d + '</svg>'; }
   var items = [
     ['category.html', 'Products', 'المنتجات', '<rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/>'],
-    ['finder.html', 'Finder', 'اختر منتجك', '<circle cx="11" cy="11" r="7"/><path d="M16.5 16.5 21 21M11 8v6M8 11h6"/>'],
-    [null, 'Selection', 'اختياراتك', '<path d="M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/>'],
+    ['rfq.html', 'Enquiry', 'استفسار', '<path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13h7M9 17h7"/>'],
     ['about.html#contact', 'Contact', 'تواصل', '<path d="M4 6h16v12H4z"/><path d="m4 7 8 6 8-6"/>']
   ];
   document.body.insertAdjacentHTML('beforeend', '<nav class="bnav" aria-label="Quick links">' + items.map(function (it) {
     var label = '<span data-ar="' + it[2] + '">' + it[1] + '</span>';
-    if (!it[0]) return '<button type="button" data-tray-open>' + ico(it[3]) + label + '<b data-count>0</b></button>';
     var here = it[0].split('#')[0] === page;
-    return '<a href="' + it[0] + '"' + (here ? ' class="here" aria-current="page"' : '') + '>' + ico(it[3]) + label + '</a>';
+    return '<a href="' + it[0] + '"' + (here ? ' class="here" aria-current="page"' : '') + '>' + ico(it[3]) + label + '' + '</a>';
   }).join('') + '</nav>');
 })();
 
