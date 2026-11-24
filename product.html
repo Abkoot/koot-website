@@ -88,7 +88,7 @@
 
 <section class="sec sec--beige">
   <div class="wrap">
-    <div class="head" data-reveal><span class="eyebrow" data-ar="من المجموعة نفسها">From the same range</span><h2 data-ar="يُورَّد <em>معها.</em>">Supplied <em>alongside.</em></h2></div>
+    <div class="head" data-reveal><span class="eyebrow" data-ar="من الفئة نفسها">From the same category</span><h2 data-ar="منتجات أخرى <em>في هذه الفئة.</em>">Other products <em>in this category.</em></h2></div>
     <div class="grid more"></div>
   </div>
 </section>
@@ -127,7 +127,9 @@
     var packs = K.packs(p);
     $('.also').innerHTML = packs.length > 1 ? (ar() ? 'متوفر بأحجام: ' : 'Available in: ') + '<span dir="ltr">' + packs.join(' · ') + '</span>' : '';
     document.title = nm(p) + ' · Koot';
-    $('.more').innerHTML = pairs[p.cat].map(K.byId).filter(function (x) { return x && x.id !== p.id; }).slice(0, 3).map(function (x, i) {
+    var others = K.list.filter(function (x) { return x.cat === p.cat && x.id !== p.id; });
+    $('.more').closest('section').hidden = !others.length;
+    $('.more').innerHTML = others.slice(0, 3).map(function (x, i) {
       var c = K.cat(x.cat), v = x.variants[0];
       return '<article class="pcard" style="--accent:' + c.accent + '" data-reveal="' + (i + 1) + '"><a class="pcard-art" href="product.html?p=' + x.id + '"><img src="' + K.src(x.image, 600) + '" alt="' + x.en + '" loading="lazy" width="450" height="600"></a><div class="pcard-body"><h3><a href="product.html?p=' + x.id + '">' + nm(x) + '</a></h3><div class="meta">' + K.packs(x).map(function (s) { return '<span dir="ltr">' + s + '</span>'; }).join('') + '</div></div><div class="pcard-act"><a class="btn btn--sm" href="product.html?p=' + x.id + '">' + (ar() ? 'التفاصيل' : 'View details') + '</a></div></article>';
     }).join('');
