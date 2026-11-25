@@ -103,7 +103,7 @@
       var c = K.cat(p.cat);
       return '<article class="pcard" style="--accent:' + c.accent + '" data-reveal="' + (i % 3 + 1) + '"><a class="pcard-art" href="product.html?p=' + p.id + '" aria-label="' + p.en + '"><img src="' + K.src(p.image, 600) + '" alt="' + p.en + '" loading="lazy" width="450" height="600" style="view-transition-name:pk-' + p.id + '"></a>' +
         '<div class="pcard-body"><h3><a href="product.html?p=' + p.id + '">' + nm(p) + '</a></h3><div class="meta">' + K.packs(p).map(function (x) { return '<span dir="ltr">' + x + '</span>'; }).join('') + '</div>' + details(p) + '</div></article>';
-    }).join('') || '<p class="empty">' + (ar() ? 'لا توجد منتجات مطابقة.' : 'No products match.') + '</p>';
+    }).join('') || '<div class="empty"><p>' + (ar() ? 'لا توجد منتجات مطابقة. لا ترى ما تحتاجه؟ قد نتمكن من توريده.' : 'No products match. Can’t see what you need? We may still be able to supply it.') + '</p><div class="btns" style="justify-content:center"><a class="btn btn--orange btn--sm" href="rfq.html">' + (ar() ? 'اسأل فريق المبيعات' : 'Ask our sales team') + '</a><a class="btn btn--ghost btn--sm" href="category.html">' + (ar() ? 'عرض كل المنتجات' : 'Show all products') + '</a></div></div>';
     $('.count').textContent = ar() ? items.length + ' منتج' : items.length + (items.length === 1 ? ' product' : ' products');
     K.refresh(); K.reveal(grid);
   }

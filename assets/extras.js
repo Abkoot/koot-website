@@ -145,7 +145,7 @@
   var items = [
     ['category.html', 'Products', 'المنتجات', '<rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/>'],
     ['rfq.html', 'Enquiry', 'استفسار', '<path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13h7M9 17h7"/>'],
-    ['about.html#contact', 'Contact', 'تواصل', '<path d="M4 6h16v12H4z"/><path d="m4 7 8 6 8-6"/>']
+    ['resources.html', 'Downloads', 'التنزيلات', '<path d="M12 3v12M7 10l5 5 5-5"/><path d="M4 19h16"/>']
   ];
   document.body.insertAdjacentHTML('beforeend', '<nav class="bnav" aria-label="Quick links">' + items.map(function (it) {
     var label = '<span data-ar="' + it[2] + '">' + it[1] + '</span>';
