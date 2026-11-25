@@ -84,7 +84,7 @@
     $('.c-cta').innerHTML = c ? '<button class="btn btn--orange" type="button" data-addcat="' + c.id + '"></button>' : '<a class="btn btn--orange" href="rfq.html">' + (ar() ? 'تواصل مع فريق المبيعات' : 'Contact our sales team') + '</a>';
     $('.crumb-c').innerHTML = c ? ' / <span>' + nm(c) + '</span>' : '';
     var pick = st.cat === 'all' ? ['fries-9', 'broccoli', 'shrimp-tail-off'].map(K.byId) : [base[0], base[Math.floor(base.length / 2)], base[base.length - 1]].filter(function (p, i, a) { return a.indexOf(p) === i; });
-    $('.fan').innerHTML = pick.map(function (p) { return '<img src="' + K.src(p.image, 600) + '" alt="">'; }).join('');
+    $('.fan').innerHTML = pick.map(function (p) { return '<img src="' + K.src(p.image.replace('/products/', '/products/cut/'), 600) + '" alt="">'; }).join('');   /* transparent cut-outs: tools/cutout.py */
     document.title = (c ? nm(c) : (ar() ? 'المنتجات' : 'Products')) + ' · Koot';
   }
   function details(p) {

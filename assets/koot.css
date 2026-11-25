@@ -961,3 +961,7 @@ html[dir=rtl] .hero-ar{display:none}
 .enq-side a[href^=mailto]{font-weight:600;color:var(--green);text-decoration:underline}
 .enq-side .btn{justify-self:start}
 @media (max-width:860px){.enq{grid-template-columns:1fr}}
+
+/* pack fan (Products header): overlapping fan of solid packs on transparent cut-outs. Packs stay inside the card. */
+.chero-art{overflow:hidden}
+.fan img{mix-blend-mode:normal;filter:drop-shadow(0 14px 16px rgba(16,53,36,.18));bottom:6%}   /* cut-outs are transparent, so the shadow follows the pack */
