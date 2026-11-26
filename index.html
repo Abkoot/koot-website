@@ -181,7 +181,7 @@
   }
   var org = {}, skus = 0; K.list.forEach(function (p) { p.variants.forEach(function (v) { skus++; org[v.origin] = 1; }); });
   var n = { products: K.list.length, skus: skus, cats: K.cats.length, origins: Object.keys(org).length };
-  document.querySelectorAll('.nums [data-n]').forEach(function (e) { e.dataset.countTo = n[e.dataset.n]; });
+  document.querySelectorAll('.nums [data-n]').forEach(function (e) { e.dataset.countTo = n[e.dataset.n]; e.textContent = n[e.dataset.n]; });
   document.addEventListener('koot:lang', shelf); shelf();
 
   (function () {

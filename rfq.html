@@ -70,6 +70,8 @@
   function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;'); }
   var picked = {}, pre = location.hash.slice(1) || new URLSearchParams(location.search).get('cat');
   if (pre && K.cat(pre)) picked[pre] = true;
+  var spec = K.byId(new URLSearchParams(location.search).get('spec') || '');
+  if (spec && !f.msg.value) f.msg.value = 'Please send the specification sheet for ' + spec.en + ' (' + spec.variants.map(function (v) { return v.sku; }).join(', ') + ').';
   function draw() {
     box.innerHTML = K.cats.map(function (c) {
       return '<label class="enq-chip"><input type="checkbox" name="lines" value="' + c.id + '"' + (picked[c.id] ? ' checked' : '') + '><span>' + (ar() ? c.ar : c.en) + '</span></label>';
@@ -92,9 +94,9 @@
     var text = ['Reference: ' + ref, 'Company: ' + c.company, 'Contact: ' + c.name + ' <' + c.email + '> ' + c.phone, 'Business: ' + c.business, 'Destination: ' + c.destination, 'Volume: ' + c.volume, 'Product lines: ' + lines.join(', '), '', f.msg.value].join('\n');
     btn.disabled = true; msg.textContent = ar() ? 'جارٍ الإرسال…' : 'Sending…';
     K.send({ type: 'enquiry', reference: ref, _subject: 'Koot trade enquiry ' + ref + ' · ' + c.company, to: K.config.rfqTo, replyTo: c.email, customer: c, productLines: lines, notes: f.msg.value, text: text, html: '<pre>' + esc(text) + '</pre>' }).then(function () {
-      f.outerHTML = '<div class="tray-done"><h3>' + (ar() ? 'وصلنا استفسارك.' : 'Thank you, your enquiry is with our sales team.') + '</h3><p>' + (ar() ? 'رقم المرجع ' : 'Reference ') + '<bdi>' + ref + '</bdi>. ' + (ar() ? 'سنرد على ' : 'We will reply to ') + '<bdi>' + esc(c.email) + '</bdi>.</p></div>';
+      f.outerHTML = '<div class="tray-done"><h3>' + (ar() ? 'وصلنا استفسارك.' : 'Thank you, your enquiry is with our sales team.') + '</h3><p>' + (ar() ? 'رقم المرجع ' : 'Reference ') + '<bdi>' + ref + '</bdi>. ' + (ar() ? 'سنرد على ' : 'We will reply to ') + '<bdi>' + esc(c.email) + '</bdi> ' + (ar() ? 'خلال يوم عمل واحد عادةً.' : 'usually within one working day.') + '</p><p>' + (ar() ? 'احتفظ بالمرجع واذكره إذا راسلتنا. نسخة من استفسارك:' : 'Keep the reference and quote it if you contact us. A copy of your enquiry:') + '</p><pre class="enq-copy">' + esc(text) + '</pre><div class="btns"><button class="btn btn--ghost btn--sm" type="button" onclick="print()">' + (ar() ? 'طباعة' : 'Print this') + '</button><a class="btn btn--sm" href="category.html">' + (ar() ? 'العودة إلى المنتجات' : 'Back to products') + '</a></div></div>';
     }).catch(function () {
-      btn.disabled = false; msg.innerHTML = (ar() ? 'تعذّر الإرسال من الموقع. راسلنا مباشرة على ' : 'We could not send this from the website. Please email us directly at ') + '<a href="mailto:sales@koot.ae">sales@koot.ae</a>.';
+      btn.disabled = false; msg.innerHTML = (ar() ? 'تعذّر الإرسال من الموقع. راسلنا مباشرة على ' : 'We could not send this from the website. Please email us directly at ') + '<a href="mailto:sales@koot.ae?subject=' + encodeURIComponent('Trade enquiry ' + ref) + '&body=' + encodeURIComponent(text) + '">sales@koot.ae</a>' + (ar() ? ' (سيفتح بريدك ومعه تفاصيل الاستفسار).' : ' (this opens your email with the enquiry filled in).');
     });
   });
   K.boot(); draw();

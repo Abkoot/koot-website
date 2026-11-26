@@ -136,6 +136,7 @@
     $('#prep').hidden = !isFries;
     var dl = [];
     if (isFries) dl.push('<a class="btn-row" href="assets/docs/KOOT_Product_Specification.pdf" target="_blank" rel="noopener"><span>' + (ar() ? 'ورقة مواصفات البطاطس المقلية' : 'French fries specification sheet') + '</span><small>PDF · EN</small></a>');
+    else dl.push('<a class="btn-row" href="rfq.html?cat=' + p.cat + '&spec=' + p.id + '"><span>' + (ar() ? 'اطلب ورقة مواصفات هذا المنتج' : 'Request the specification sheet') + '</span><small>' + (ar() ? 'طلب' : 'REQUEST') + '</small></a>');
     dl.push('<a class="btn-row" data-photo download><span>' + (ar() ? 'صورة العبوة' : 'Pack photo') + '</span><small>WEBP</small></a>');
     $('.dl').innerHTML = dl.join('');
     $('.opts thead').innerHTML = '<tr><th>' + (ar() ? 'رمز الصنف' : 'Item code') + '</th><th>' + (ar() ? 'الخيار' : 'Option') + '</th><th>' + (ar() ? 'العبوة' : 'Pack') + '</th><th>' + (ar() ? 'الكرتون (صافي / إجمالي)' : 'Carton (net / gross)') + '</th><th>' + (ar() ? 'المنشأ' : 'Origin') + '</th><th></th></tr>';

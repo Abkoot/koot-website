@@ -965,3 +965,4 @@ html[dir=rtl] .hero-ar{display:none}
 /* pack fan (Products header): overlapping fan of solid packs on transparent cut-outs. Packs stay inside the card. */
 .chero-art{overflow:hidden}
 .fan img{mix-blend-mode:normal;filter:drop-shadow(0 14px 16px rgba(16,53,36,.18));bottom:6%}   /* cut-outs are transparent, so the shadow follows the pack */
+.enq-copy{white-space:pre-wrap;font:13px/1.5 ui-monospace,monospace;background:rgba(16,53,36,.05);padding:14px;border-radius:10px;margin:10px 0 16px;text-align:start;direction:ltr}
