@@ -10,7 +10,7 @@
   var $$ = function (s, r) { return Array.prototype.slice.call((r || doc).querySelectorAll(s)); };
 
   /* ---------- language ---------- */
-  K.lang = store.get('koot-lang', 'en');
+  K.lang = 'en';   /* English only: the Arabic version was removed */
   K.L = function (en, ar) { return '<span data-ar="' + ar + '">' + en + '</span>'; };
   K.t = function (o) { return K.lang === 'ar' ? o.ar : o.en; };
   K.applyLang = function (scope) {
@@ -29,18 +29,17 @@
 
   /* ---------- chrome ---------- */
   var L = K.L;
-  var nav = [['category.html', 'Products', 'المنتجات'], ['rfq.html', 'Trade enquiry', 'استفسار تجاري'], ['about.html', 'About Koot', 'عن كوت'], ['resources.html', 'Resources', 'المصادر']];
+  var nav = [['about.html', 'About Koot', 'عن كوت'], ['category.html', 'Products', 'المنتجات'], ['rfq.html', 'Trade enquiry', 'استفسار تجاري'], ['resources.html', 'Resources', 'المصادر']];
   doc.body.insertAdjacentHTML('afterbegin',
     '<a class="skip" href="#main">Skip to content</a><header class="hdr"><a class="logo" href="index.html" aria-label="Koot home"><img src="assets/img/koot-logo.webp" alt="Koot, food that matters" width="112" height="48"></a>' +
     '<nav class="nav" id="nav" aria-label="Main">' + nav.map(function (n) { return '<a href="' + n[0] + '" data-ar="' + n[2] + '">' + n[1] + '</a>'; }).join('') + '</nav>' +
     '<div class="tools"><a class="ico" href="category.html#search" aria-label="Search products"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M16.5 16.5L21 21"/></svg></a>' +
-    '<button class="lang" type="button" aria-label="Switch language"></button>' +
-    '<a class="selbtn" href="rfq.html">' + L('Contact sales', 'تواصل مع المبيعات') + '</a>' +
+        '<a class="selbtn" href="rfq.html">' + L('Contact sales', 'تواصل مع المبيعات') + '</a>' +
     '<button class="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="nav"><i></i><i></i></button></div></header>');
   doc.body.insertAdjacentHTML('beforeend',
     '<footer class="ftr"><div class="wrap ftr-grid"><div><span class="logo"><img src="assets/img/koot-logo.webp" alt="Koot" width="168" height="72"></span><p class="ftr-line" data-ar="طعام له معنى.">Food that matters.</p><p data-ar="كوت · علامة أغذية من كوت إكسبرت للتجارة العامة ذ.م.م · دبي، الإمارات العربية المتحدة">Koot · a food brand of Koot Expert General Trading LLC · Dubai, United Arab Emirates<br><a href="mailto:sales@koot.ae">sales@koot.ae</a></p></div>' +
-    '<div><h4 data-ar="استكشف">Explore</h4><a href="category.html" data-ar="المنتجات">Products</a><a href="rfq.html" data-ar="استفسار تجاري">Trade enquiry</a><a href="resources.html" data-ar="المصادر">Resources</a></div>' +
-    '<div><h4 data-ar="كوت">Koot</h4><a href="about.html" data-ar="عن كوت">About Koot</a><a href="about.html#contact" data-ar="تواصل معنا">Contact</a></div></div>' +
+    '<div><h4 data-ar="استكشف">Explore</h4><a href="about.html" data-ar="عن كوت">About Koot</a><a href="category.html" data-ar="المنتجات">Products</a><a href="rfq.html" data-ar="استفسار تجاري">Trade enquiry</a><a href="resources.html" data-ar="المصادر">Resources</a></div>' +
+    '<div><h4 data-ar="كوت">Koot</h4><a href="about.html#contact" data-ar="تواصل معنا">Contact</a></div></div>' +
     '<div class="wrap ftr-note"><p data-ar="© 2026 كوت إكسبرت للتجارة العامة ذ.م.م. جميع الحقوق محفوظة.">© 2026 Koot Expert General Trading LLC. All rights reserved.</p><nav class="socials" aria-label="Social media"><a href="https://www.facebook.com/people/KootUAE/100092333833482/" target="_blank" rel="noopener">Facebook</a><a href="https://www.instagram.com/koot.uae/" target="_blank" rel="noopener">Instagram</a><a href="https://www.linkedin.com/company/koot-uae/" target="_blank" rel="noopener">LinkedIn</a><a href="https://www.tiktok.com/@koot.uae" target="_blank" rel="noopener">TikTok</a></nav></div></footer>' +
     '<div class="toast" role="status"></div>');
 

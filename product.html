@@ -6,7 +6,7 @@
 <title>Product · Koot</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400..800;1,9..144,400..600&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..800;1,9..144,400..600&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/koot.css">
 <link rel="icon" href="assets/img/favicon.png" type="image/png"><link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 </head>
@@ -136,7 +136,7 @@
     $('#prep').hidden = !isFries;
     var dl = [];
     if (isFries) dl.push('<a class="btn-row" href="assets/docs/KOOT_Product_Specification.pdf" target="_blank" rel="noopener"><span>' + (ar() ? 'ورقة مواصفات البطاطس المقلية' : 'French fries specification sheet') + '</span><small>PDF · EN</small></a>');
-    else dl.push('<a class="btn-row" href="rfq.html?cat=' + p.cat + '&spec=' + p.id + '"><span>' + (ar() ? 'اطلب ورقة مواصفات هذا المنتج' : 'Request the specification sheet') + '</span><small>' + (ar() ? 'طلب' : 'REQUEST') + '</small></a>');
+    else dl.push('<a class="btn-row" href="resources.html#specs"><span>Specification sheet</span><small>RESOURCES</small></a>');
     dl.push('<a class="btn-row" data-photo download><span>' + (ar() ? 'صورة العبوة' : 'Pack photo') + '</span><small>WEBP</small></a>');
     $('.dl').innerHTML = dl.join('');
     $('.opts thead').innerHTML = '<tr><th>' + (ar() ? 'رمز الصنف' : 'Item code') + '</th><th>' + (ar() ? 'الخيار' : 'Option') + '</th><th>' + (ar() ? 'العبوة' : 'Pack') + '</th><th>' + (ar() ? 'الكرتون (صافي / إجمالي)' : 'Carton (net / gross)') + '</th><th>' + (ar() ? 'المنشأ' : 'Origin') + '</th><th></th></tr>';

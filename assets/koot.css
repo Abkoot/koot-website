@@ -804,9 +804,12 @@ html[dir=rtl] .hero-ar{display:none}
 .pillars b{position:absolute;inset-block-start:clamp(26px,3vw,42px);inset-inline-end:clamp(26px,3vw,42px);font:500 1rem/1 var(--display);color:var(--muted)}
 .pillars h3{font-size:clamp(1.6rem,2.6vw,2.2rem)}
 .pillars p{color:var(--muted)}
+.pillar-img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:calc(var(--r) - 6px);margin-bottom:6px}
+.brandmark-logo{display:block;height:clamp(56px,7vw,84px);width:auto;margin-bottom:18px}
+.spec-cat{margin:18px 0 6px;font-size:1.1rem}
 .ot{display:grid;grid-template-columns:1.3fr 1fr;gap:clamp(20px,4vw,56px);align-items:stretch}
 .ot-img{position:relative;border-radius:var(--r);overflow:hidden;min-height:clamp(320px,42vw,560px);background:rgba(0,0,0,.2)}
-.ot-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1s var(--ease)}
+.ot-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity 1s var(--ease)}
 .ot-img img.on{opacity:1}
 .ot-side{display:grid;gap:18px;align-content:start}
 .ot-tabs{display:flex;flex-wrap:wrap;gap:8px}
@@ -966,3 +969,18 @@ html[dir=rtl] .hero-ar{display:none}
 .chero-art{overflow:hidden}
 .fan img{mix-blend-mode:normal;filter:drop-shadow(0 14px 16px rgba(16,53,36,.18));bottom:6%}   /* cut-outs are transparent, so the shadow follows the pack */
 .enq-copy{white-space:pre-wrap;font:13px/1.5 ui-monospace,monospace;background:rgba(16,53,36,.05);padding:14px;border-radius:10px;margin:10px 0 16px;text-align:start;direction:ltr}
+
+/* ---------- zoomed-out photos (owner request, Nov 2026) ---------- */
+.pcard-art{padding:clamp(22px,3vw,34px)}
+.pcard-art img{height:86%;max-height:86%}
+.pcard:hover .pcard-art img{transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) scale(1.02)}
+.pdp-photo img{padding:clamp(36px,6vw,80px)}
+.mq-card img{height:150px;padding:8px;box-sizing:border-box}
+.ot-thumbs img{padding:14px}
+.fan img{height:72%}
+.fan img:nth-child(1),.fan img:nth-child(3){height:60%}
+.fan img:only-child{height:80%}
+/* category photos on the homepage: the whole photo, smaller, framed on the green */
+.ot-img{background:rgba(0,0,0,.12)}
+.ot-img img{inset:8%;width:84%;height:84%;object-fit:contain}
+@media (max-width:860px){.pdp-photo img{padding:28px}}
