@@ -89,8 +89,8 @@ a:hover>.arr,button:hover>.arr{transform:translateX(5px)}
 .tools{display:flex;align-items:center;gap:6px}
 .ico,.lang{min-width:44px;height:44px;display:grid;place-items:center;border-radius:99px;padding:0 12px;font-weight:600;font-size:.9rem}
 .ico:hover,.lang:hover{background:rgba(21,34,27,.07)}
-.selbtn{display:inline-flex;align-items:center;gap:10px;height:44px;padding:0 8px 0 18px;border-radius:99px;background:var(--green);color:var(--cream);font-weight:600;font-size:.9rem}
-[dir=rtl] .selbtn{padding:0 18px 0 8px}
+.selbtn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:44px;padding:0 20px;border-radius:99px;background:var(--green);color:var(--cream);font-weight:600;font-size:.9rem}
+[dir=rtl] .selbtn{padding:0 20px}
 .selbtn b{min-width:28px;height:28px;display:grid;place-items:center;border-radius:99px;background:rgba(255,255,255,.16);font-size:.82rem}
 .selbtn b.on{background:var(--orange);color:var(--ink)}
 .burger{display:none;width:44px;height:44px;place-items:center;align-content:center;gap:7px}
