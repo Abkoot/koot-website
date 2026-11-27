@@ -980,7 +980,6 @@ html[dir=rtl] .hero-ar{display:none}
 .fan img{height:72%}
 .fan img:nth-child(1),.fan img:nth-child(3){height:60%}
 .fan img:only-child{height:80%}
-/* category photos on the homepage: the whole photo, smaller, framed on the green */
-.ot-img{background:rgba(0,0,0,.12)}
-.ot-img img{inset:8%;width:84%;height:84%;object-fit:contain}
+/* category photos on the homepage: 4:3 zoomed-out shots (Nov 2026), fill the frame */
+.ot-img img{object-fit:cover}
 @media (max-width:860px){.pdp-photo img{padding:28px}}
